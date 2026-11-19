@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Road to ムツーキー・ベッツ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0c1b33;--panel:#f4f7fb;--ink:#14233c;--mute:#6b7a92;--navy:#16345e;--gold:#f2b632;--green:#22b04a;--blue:#2a7de1;--red:#e0483c;--track:#d8dfea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(120% 60% at 50% 0,#17386b 0,var(--bg) 60%) fixed;color:#fff;font:500 15px/1.5 "M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;min-height:100vh}
+main{max-width:760px;margin:0 auto;padding:16px 16px 96px}
+.top{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.chip{background:#ffffff14;border:1px solid #ffffff2a;border-radius:999px;padding:4px 12px;font-weight:800}
+.chip.fire{background:var(--red);border-color:var(--red)}
+h1{font-size:26px;margin:10px 0 2px;font-weight:800;letter-spacing:.02em}
+.lv{margin:6px 0 12px}
+.lv .bar{height:10px;background:#ffffff26;border-radius:9px;overflow:hidden}
+.lv .bar i{display:block;height:100%;background:var(--gold)}
+.lv small{color:#c7d3e8}
+.card{background:var(--panel);color:var(--ink);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 10px #0006}
+.card h2{margin:-14px -14px 10px;background:var(--navy);color:#fff;font-size:16px;padding:9px 14px;border-radius:16px 16px 0 0}
+.ring{display:flex;align-items:center;gap:16px;background:#0b2447;color:#fff}
+.ring svg{flex:none}
+.ring ul{list-style:none;margin:0;padding:0;font-size:14px;columns:2;gap:10px;flex:1}
+.ring li.ok::before{content:"✓ ";color:var(--green);font-weight:800}
+.ring li:not(.ok)::before{content:"○ ";color:#8da2c4}
+.row{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 0;border-bottom:1px solid #e3e8f0}
+.row:last-child{border:0}
+.row b{font-size:16px}
+.pct{font-weight:800;text-align:right}
+.track{grid-column:1/-1;height:9px;background:var(--track);border-radius:9px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--green);border-radius:9px;transition:width .25s}
+.ctl{grid-column:1/-1;display:flex;align-items:center;gap:8px;margin-top:4px}
+.ctl button{width:44px;height:40px;border-radius:12px;border:0;font:800 16px inherit;background:var(--blue);color:#fff}
+.ctl button.m{background:#9aa8bf}
+.ctl input{width:84px;height:40px;text-align:center;font:800 18px inherit;border:2px solid var(--track);border-radius:12px;color:var(--ink);background:#fff}
+.ctl span{color:var(--mute)}
+.goal{display:grid;grid-template-columns:78px 1fr auto;gap:8px;align-items:center;padding:5px 0;font-size:14px}
+.goal .track{grid-column:auto}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bd{text-align:center;font-size:12px;line-height:1.3}
+.bd .m{width:58px;height:58px;margin:0 auto 4px;border-radius:16px;background:linear-gradient(145deg,#d98b4b,#8a4a1c);display:grid;place-items:center;font-size:26px;box-shadow:0 2px 6px #0004}
+.bd.off{opacity:.35;filter:grayscale(1)}
+.bd small{color:var(--mute);display:block}
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:4px;background:#0a1630f2;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid #ffffff22}
+.tabs button{flex:1;max-width:120px;border:0;border-radius:12px;padding:9px 0;background:transparent;color:#c7d3e8;font:800 13px inherit}
+.tabs button.on{background:var(--gold);color:#14233c}
+.fld{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0}
+.fld input{width:90px;height:38px;border:2px solid var(--track);border-radius:10px;text-align:center;font:800 16px inherit;color:var(--ink);background:#fff}
+.fld input.t{width:150px}
+.hint{color:var(--mute);font-size:13px}
+.wrap{overflow-x:auto}
+select{height:38px;border-radius:10px;border:2px solid var(--track);font:800 14px inherit;color:var(--ink);background:#fff}
+button.danger{margin-top:8px;background:none;border:2px solid var(--red);color:var(--red);border-radius:12px;padding:8px 14px;font:800 14px inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.home{display:grid;gap:12px;grid-template-areas:"ring" "practice" "goals" "badges"}
+.home>.card{margin:0}
+.a-ring{grid-area:ring}.a-practice{grid-area:practice}.a-goals{grid-area:goals}.a-badges{grid-area:badges}
+.ring svg{width:140px;height:140px}
+.ctl{flex-wrap:wrap}
+.ctl .st{display:flex;align-items:center;gap:6px;margin-left:auto}
+.ctl .st button{width:40px}
+.ctl .st input{width:54px}
+@media (min-width:600px){body{font-size:17px}.ctl button{height:48px;width:52px}.ctl input{height:48px;font-size:20px}.row b{font-size:18px}.ring svg{width:160px;height:160px}h1{font-size:30px}}
+@media (orientation:landscape) and (min-width:700px){main{max-width:1180px;padding:12px 24px 88px}.home{grid-template-columns:1.15fr 1fr;grid-template-areas:"practice ring" "practice goals" "practice badges";align-items:start}.row{padding:7px 0}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<nav class="tabs" id="tabs"></nav>
+<script>
+var DEF={name:"ぼく",week:500,month:2000,items:[
+{id:"suburi",n:"素振り",u:"回",g:100,s:10},{id:"squat",n:"スクワット",u:"回",g:10,s:1},
+{id:"pushup",n:"腕立て伏せ",u:"回",g:10,s:1},{id:"abs",n:"腹筋",u:"回",g:15,s:1},
+{id:"plank",n:"プランク",u:"秒",g:30,s:10},{id:"jump",n:"縄跳び、ジャンプ",u:"分",g:5,s:1},{id:"shoulder",n:"肩ストレッチ",u:"回",g:1,s:1}],logs:{}};
+var S;try{S=JSON.parse(localStorage.getItem("jishuren")||"null")}catch(e){S=null}
+if(!S)S=JSON.parse(JSON.stringify(DEF));
+if(S.v!==2){S.v=2;S.items.forEach(function(i){if(i.id==="hip"){i.id="jump";i.n="縄跳び、ジャンプ";i.u="分";i.g=5;i.s=1}if(i.id==="stretch"){i.id="shoulder";i.n="肩ストレッチ";i.u="回";i.g=1;i.s=1}});for(var d in S.logs){delete S.logs[d].hip;delete S.logs[d].stretch}}
+S.items.forEach(function(i){if(!i.gs)i.gs=1});
+var tab="home";
+function save(){try{localStorage.setItem("jishuren",JSON.stringify(S))}catch(e){}}
+function ds(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function today(){return ds(new Date())}
+function get(d,id){return (S.logs[d]&&S.logs[d][id])||0}
+function sets(d,id){return get(d,id+":s")}
+function prog(d,i){var c=get(d,i.id)/i.g,s=sets(d,i.id)/i.gs;return s>=1?c:Math.min(c,s)}
+function setv(id,v){var d=today(),L=S.logs[d]=S.logs[d]||{};v=Math.max(0,Math.round(v)||0);L[id]=v;if(id.indexOf(":s")<0&&v>0&&!L[id+":s"])L[id+":s"]=1;save();render()}
+function addDays(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x}
+function sumSub(from,to){var t=0;for(var d=new Date(from);d<=to;d=addDays(d,1))t+=get(ds(d),"suburi");return t}
+function allDone(d){return S.items.every(function(i){return prog(d,i)>=1})}
+function anyLog(d){return S.items.some(function(i){return get(d,i.id)>0})}
+function streak(){var d=new Date(),n=0;if(!anyLog(ds(d)))d=addDays(d,-1);while(anyLog(ds(d))){n++;d=addDays(d,-1)}return n}
+function points(){var p=0;for(var d in S.logs){S.items.forEach(function(i){p+=Math.round(Math.min(prog(d,i),1)*10)});if(allDone(d))p+=30}return p}
+var TITLES=["見習いルーキー","期待のルーキー","レギュラー候補","チームの主力","エース級","スーパースター"];
+function level(){var p=points(),L=Math.floor(p/500)+1;return{L:L,p:p,rest:500-(p%500),pc:(p%500)/5,t:TITLES[Math.min(L-1,TITLES.length-1)],nt:TITLES[Math.min(L,TITLES.length-1)]}}
+function badges(){var tot=0,best=0,sd=0,all=0;for(var d in S.logs){var s=get(d,"suburi");tot+=s;if(s>best)best=s;if(allDone(d))all++}
+var g=(S.items[0]||{g:100}).g,st=streak();
+return[["🏏","はじめの素振り",tot>0],["💯","素振り 1日"+g+"回",best>=g],["🔥","3日連続",st>=3],["⚡","7日連続",st>=7],["✅","全メニュー達成",all>=1],["🏆","素振り 累計1,000回",tot>=1000],["🌟","全達成 5日",all>=5],["👑","素振り 累計5,000回",tot>=5000],["⚾","素振り 1日"+g*2+"回",best>=g*2]]}
+function mon(d){var x=new Date(d),w=(x.getDay()+6)%7;return addDays(x,-w)}
+function render(){
+ var h="",t=today(),lv=level(),st=streak(),now=new Date();
+ var days=["日","月","火","水","木","金","土"];
+ if(tab==="home"){
+  var done=0;S.items.forEach(function(i){if(prog(t,i)>=1)done++});
+  var rate=S.items.length?Math.round(done/S.items.length*100):0,C=2*Math.PI*52;
+  h+='<div class="top"><span class="chip">'+(now.getMonth()+1)+"月"+now.getDate()+"日("+days[now.getDay()]+')</span><span class="chip fire">🔥 連続練習 '+st+'日</span><span class="chip">Lv.'+lv.L+' ・ '+lv.p+'pt</span></div>';
+  h+="<h1>Road to ムツーキー・ベッツ</h1>";
+  h+='<div class="lv"><div class="bar"><i style="width:'+lv.pc+'%"></i></div><small>称号「'+lv.t+'」 次の称号「'+lv.nt+'」まで あと '+lv.rest+'pt</small></div>';
+  h+='<div class="home"><div class="card ring a-ring"><svg width="130" height="130" viewBox="0 0 130 130" role="img" aria-label="今日の達成率 '+rate+'%"><circle cx="65" cy="65" r="52" fill="none" stroke="#ffffff26" stroke-width="12"/><circle cx="65" cy="65" r="52" fill="none" stroke="'+(rate===100?"#22b04a":"#f2b632")+'" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+C*rate/100+" "+C+'" transform="rotate(-90 65 65)"/><text x="65" y="60" text-anchor="middle" fill="#c7d3e8" font-size="11">今日の達成率</text><text x="65" y="86" text-anchor="middle" fill="#fff" font-size="28" font-weight="800">'+rate+'%</text></svg><ul>'+S.items.map(function(i){return'<li class="'+(prog(t,i)>=1?"ok":"")+'">'+esc(i.n)+"</li>"}).join("")+"</ul></div>";
+  var mo=mon(now),sw=sumSub(mo,now),ms=sumSub(new Date(now.getFullYear(),now.getMonth(),1),now),sd=get(t,"suburi"),g0=S.items[0];
+  h+='<div class="card a-practice"><h2>今日の練習</h2>'+S.items.map(function(i){var v=get(t,i.id),sv=sets(t,i.id),p=Math.round(prog(t,i)*100);
+   return'<div class="row"><b>'+esc(i.n)+'</b><span class="pct">'+p+'%</span><div class="track"><i style="width:'+Math.min(p,100)+'%"></i></div><div class="ctl"><button class="m" data-a="'+i.id+'" data-d="-'+i.s+'" aria-label="'+esc(i.n)+'を減らす">−'+i.s+'</button><input type="number" inputmode="numeric" min="0" value="'+v+'" data-in="'+i.id+'" aria-label="'+esc(i.n)+'の記録"><button data-a="'+i.id+'" data-d="'+i.s+'" aria-label="'+esc(i.n)+'を増やす">＋'+i.s+'</button><span>/ '+i.g+i.u+'</span><div class="st"><button class="m" data-a="'+i.id+':s" data-d="-1" aria-label="'+esc(i.n)+'のセットを減らす">−</button><input type="number" inputmode="numeric" min="0" value="'+sv+'" data-in="'+i.id+':s" aria-label="'+esc(i.n)+'のセット数"><button data-a="'+i.id+':s" data-d="1" aria-label="'+esc(i.n)+'のセットを増やす">＋</button><span>セット / '+i.gs+'</span></div></div></div>'}).join("")+"</div>";
+  if(g0&&g0.id==="suburi"){h+='<div class="card a-goals"><h2>目標の達成状況（素振り）</h2>'+goal("単日目標",sd,g0.g)+goal("週間目標",sw,S.week)+goal("月間目標",ms,S.month)+'<div class="hint">素振りの総累計 '+tot()+" 回</div></div>"}
+  var nb=badges().filter(function(b){return b[2]});
+  h+='<div class="card a-badges"><h2>獲得したバッジ</h2>'+(nb.length?'<div class="badges">'+nb.slice(-3).map(bd).join("")+"</div>":'<p class="hint">練習を記録すると最初のバッジがもらえるよ。</p>')+"</div></div>";
+ }
+ if(tab==="graph"){
+  h+="<h1>成長グラフ</h1>";
+  var opts=S.items.map(function(i){return'<option value="'+i.id+'"'+(i.id===gsel?" selected":"")+">"+esc(i.n)+"</option>"}).join("");
+  var it=S.items.filter(function(i){return i.id===gsel})[0]||S.items[0];gsel=it.id;
+  var vals=[],labs=[];for(var k=13;k>=0;k--){var d=addDays(now,-k);vals.push(get(ds(d),it.id));labs.push((d.getMonth()+1)+"/"+d.getDate())}
+  var mx=Math.max.apply(null,vals.concat([it.g,1])),bars="";
+  vals.forEach(function(v,k){var bh=v/mx*150,x=14+k*24;bars+='<rect x="'+x+'" y="'+(170-bh)+'" width="18" height="'+bh+'" rx="4" fill="'+(v>=it.g?"#22b04a":"#2a7de1")+'"/>'+(k%2===0?'<text x="'+(x+9)+'" y="190" text-anchor="middle" font-size="9" fill="#6b7a92">'+labs[k]+"</text>":"")});
+  var gy=170-it.g/mx*150;
+  h+='<div class="card"><h2>直近14日間</h2><div class="fld"><span>メニュー</span><select id="gsel">'+opts+'</select></div><div class="wrap"><svg viewBox="0 0 350 196" width="100%" role="img" aria-label="'+esc(it.n)+'の14日間の記録">'+bars+'<line x1="8" x2="350" y1="'+gy+'" y2="'+gy+'" stroke="#f2b632" stroke-width="2" stroke-dasharray="5 4"/></svg></div><p class="hint">黄色い線が目標（'+it.g+it.u+'）。緑は達成した日。</p></div>';
+ }
+ if(tab==="badge"){h+='<h1>バッジ</h1><div class="card"><div class="badges">'+badges().map(bd).join("")+"</div></div>"}
+ if(tab==="set"){
+  h+='<h1>設定</h1><div class="card"><h2>素振りの目標</h2><div class="fld"><span>素振り 週間目標</span><input type="number" id="wk" value="'+S.week+'"></div><div class="fld"><span>素振り 月間目標</span><input type="number" id="mo" value="'+S.month+'"></div></div>';
+  h+='<div class="card"><h2>1日の目標</h2>'+S.items.map(function(i){return'<div class="fld"><span>'+esc(i.n)+"（"+i.u+'）</span><span><input type="number" min="1" value="'+i.g+'" data-g="'+i.id+'" aria-label="回数の目標"> <input type="number" min="1" value="'+i.gs+'" data-gs="'+i.id+'" aria-label="セットの目標" style="width:56px"> セット</span></div>'}).join("")+'<p class="hint">記録はこの端末のブラウザに保存されます。</p><button class="danger" id="rst">記録をすべて消す</button></div>';
+ }
+ document.getElementById("app").innerHTML=h;
+ document.getElementById("tabs").innerHTML=[["home","ホーム"],["graph","成長グラフ"],["badge","バッジ"],["set","設定"]].map(function(x){return'<button data-t="'+x[0]+'" class="'+(tab===x[0]?"on":"")+'">'+x[1]+"</button>"}).join("");
+}
+var gsel="suburi";
+function tot(){var n=0;for(var d in S.logs)n+=get(d,"suburi");return n}
+function goal(l,v,g){var p=Math.round(v/g*100);return'<div class="goal"><b>'+l+'</b><div class="track"><i style="width:'+Math.min(p,100)+'%"></i></div><span>'+v+" / "+g+"（"+p+"%）</span></div>"}
+function bd(b){return'<div class="bd'+(b[2]?"":" off")+'"><div class="m">'+b[0]+"</div>"+b[1]+"</div>"}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+ if(b.dataset.t){tab=b.dataset.t;render();window.scrollTo(0,0)}
+ else if(b.dataset.a){setv(b.dataset.a,get(today(),b.dataset.a)+Number(b.dataset.d))}
+ else if(b.id==="rst"&&confirm("記録をすべて消します。いいですか？")){S.logs={};save();render()}});
+document.addEventListener("change",function(e){var t=e.target;
+ if(t.dataset.in)setv(t.dataset.in,Number(t.value));
+ else if(t.dataset.g){S.items.forEach(function(i){if(i.id===t.dataset.g)i.g=Math.max(1,Number(t.value)||1)});save()}
+ else if(t.dataset.gs){S.items.forEach(function(i){if(i.id===t.dataset.gs)i.gs=Math.max(1,Number(t.value)||1)});save()}
+ else if(t.id==="nm"){S.name=t.value.trim()||"ぼく";save()}
+ else if(t.id==="wk"){S.week=Math.max(1,Number(t.value)||500);save()}
+ else if(t.id==="mo"){S.month=Math.max(1,Number(t.value)||2000);save()}
+ else if(t.id==="gsel"){gsel=t.value;render()}});
+render();
+</script>
+</body>
+</html>
